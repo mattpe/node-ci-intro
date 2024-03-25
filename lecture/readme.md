@@ -3,7 +3,7 @@
 ## Continuous workflows
 
 ![Continuous workflows](./cicd-workflows.jpg)
-![Ci vs. CD](./ci-vs-cd.jpg)
+![CI vs. CD](./ci-vs-cd.jpg)
 
 ## Continuous Integration (CI)
 
@@ -51,14 +51,16 @@
 
 ### Deployment Pipeline
 
-- A deployment pipeline is an system responsible for (automated) continuous delivery of software
+- A deployment pipeline is a system responsible for (automated) continuous delivery of software
 - It deploys code to dev, test and production environments, enforces approval gates, and executes automated tests
-- Stages
-  1. Check-in new version of code
-  1. Compile and provide binaries for later testing and integration stages
-  1. Later stages may include automatic or manual checks
-  1. Stages proceed either automatically (if tests pass) or require human authorization
-  1. Deploying into production is the final stage in a pipeline
+- Primary phases:
+  1. Developer writes code with new or updated software functionality
+  1. **Commit**: updated code (the change) is committed to version control system
+  1. Compilation of code provides binaries for later testing and integration stages (if needed)
+  1. **Test**: the change undergoes multiple automated tests
+  1. **Stage**: the change is deployed to a realistic environment for final testing.
+  1. Stage proceeds either automatically (if tests pass) or require human authorization
+  1. **Deploy**: the change is deployed to a production environment.
 
 ### Workflow from development to production (simplified example)
 
