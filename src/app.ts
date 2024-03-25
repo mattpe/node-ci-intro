@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 import express, {Request, Response} from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -11,7 +11,12 @@ import MessageResponse from './interfaces/MessageResponse';
 const app = express();
 
 app.use(morgan('dev'));
-app.use(helmet());
+app.use(
+  helmet({
+    // quickfix for apidoc csp error
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(express.json());
 

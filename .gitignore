@@ -72,7 +72,8 @@ typings/
 # Serverless directories
 .serverless
 
-dist
+dist/
+docs/
 
 uploads/*
 !uploads/.gitkeep

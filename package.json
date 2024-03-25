@@ -1,6 +1,6 @@
 {
-  "name": "express-api-starter-ts",
-  "version": "1.2.0",
+  "name": "node-ci-intro",
+  "version": "1.2.1",
   "description": " A basic starter for an express.js API with Typescript",
   "main": "src/index.ts",
   "scripts": {
@@ -9,12 +9,17 @@
     "build": "tsc",
     "lint": "eslint --fix src test",
     "test": "jest",
-    "test:unit": "jest -c jest.unit.config.js"
+    "test:unit": "jest -c jest.unit.config.js",
+    "apidoc": "apidoc -o docs/"
   },
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/w3cj/express-api-starter.git"
+    "url": "https://github.com/mattpe/node-ci-intro"
+  },
+  "apidoc": {
+    "title": "My API docs",
+    "url": "https://example.com/api/v1"
   },
   "license": "MIT",
   "dependencies": {

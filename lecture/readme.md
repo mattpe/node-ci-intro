@@ -60,6 +60,26 @@
   1. Stages proceed either automatically (if tests pass) or require human authorization
   1. Deploying into production is the final stage in a pipeline
 
+### Workflow from development to production (simplified example)
+
+```mermaid
+graph TD
+    A[Local Code Commit] --> B[Build]
+    B --> C{Unit/integration Tests}
+    C -->|Pass| D[Push to CI server,\n Integration tests]
+    C -->|Fail| E[Fix Issues]
+    E --> B
+    D -->|Pass| F[Deploy to Staging/\n Test server environment]
+    D -->|Fail| E
+    F --> G{Acceptance Tests}
+    G -->|Pass| H[Deploy to Production]
+    G -->|Fail| I[Fix Issues]
+    I --> F
+    H --> J[Monitor & Collect Feedback]
+    J --> K[Continuous Improvement]
+    K --> A
+```
+
 ---
 
 ## Assignment
@@ -84,21 +104,21 @@ Design and configure Continuous Integration pipeline for your project.
 
 1. Implement a functional CI/CD pipeline (on prototype level at least)
 
-    - Try to reach at least making automatic build when you push code to your git remote repository. If you use NodeJS for back-end application, try for example to run unit tests automatically.
+    - Try to reach at least making automatic build when you push code to your git remote repository. If you use NodeJS for back-end application, try to run (unit) tests and deploy the application automatically.
     - At your convenience, use GitHub (with integrated Actions) or Gitlab (with integrated CI pipelines) or TravisCI (or [any other](https://github.com/marketplace/category/continuous-integration))
-    - Once you get the pipeline, test pushing with working code (and corrupted code too to get a build to fail to see the results).
+    - Once you get the pipeline done, test pushing with working code (and corrupted code too to get a build to fail to see the results).
 
-2. Write a description about your CI/CD design and implementation include e.g.:
+2. Write a description about your CI/CD pipeline design and implementation including e.g.:
 
-    - how is the current implementation working?
+    - How is the current implementation working?
       - If relevant, give the link to e.g. test server where latest version of app get deployed, or Artifacts (assets-for-download) from which one can download fresh apk, etc.
-    - key features
-    - what is still missing?
-    - possible next steps or enhancements in future
+    - Key features
+    - What is still missing?
+    - Possible next steps or enhancements in future
 
 3. Submitting the assignment
 
-    - include a link to your implementation and the written description to your project's Planner
-    - use your CI/CD pipeline implementation as a part of your project development workflow
+    - Include a link to your implementation and the written description to your project's Planner/project board
+    - Use your CI/CD pipeline implementation as a part of your project development workflow
 
 Assignment is evaluated as a part of the project work.
