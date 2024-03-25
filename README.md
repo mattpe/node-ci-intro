@@ -16,14 +16,13 @@ Testing successful API responses and error handling. The test cases for both sce
 
 ## Setting up CI/CD
 
-1. Create a new repository in GitHub
-1. Push this repository to the new repository (change the remote `origin` URL first with `git remote set-url origin <new-repo-url>`)
-1. Open the repository in GitHub in a browser and choose `Actions` from the top menu
+1. Create a new repository in GitHub. Use this repo as a template or clone and push this repository to the new repository (change the remote `origin` URL first with `git remote set-url origin <new-repo-url>`)
+2. Open the repository in GitHub in a browser and choose `Actions` from the top menu
    - Browse the available CI/CD templates and choose `Node.js` as the template
    - Commit the suggested changes to the repository
    - Pull the changes to your local repository
-1. View & edit the `.github/workflows/node.js.yml` [yaml](https://yaml.org/) file and update the content according your needs
-1. Test action by committing the changes and pushing them to the remote repository, check the status of the action in GitHub
+3. View & edit the `.github/workflows/node.js.yml` [yaml](https://yaml.org/) file and update the content according your needs
+4. Test action by committing the changes and pushing them to the remote repository, check the status of the action in GitHub
 
 ## Example of setting up a CD pipeline for a Server (e.g. Virtual Machine in Azure)
 
