@@ -86,7 +86,7 @@ graph TD
 
 ## Assignment
 
-## Reading & examples
+### Reading & examples
 
 Some links to get started with
 
@@ -98,11 +98,11 @@ Some links to get started with
 - [Android example](https://www.runway.team/blog/how-to-set-up-a-ci-cd-pipeline-android-app-using-bitrise) and [other example](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions)
 - [iOS example](https://www.runway.team/blog/how-to-set-up-a-ci-cd-pipeline-for-your-ios-app-fastlane-github-actions)
 
-## Task
+### Task
 
-Do [this Node.js app example](https://github.com/mattpe/node-ci-intro).
+Study/do [this Node.js & GitHub actions example](https://github.com/mattpe/node-ci-intro).
 
-Design and configure Continuous Integration pipeline for your project.
+#### Design and configure Continuous Integration pipeline for your project
 
 1. Implement a functional CI/CD pipeline (on prototype level at least)
 
@@ -113,14 +113,14 @@ Design and configure Continuous Integration pipeline for your project.
 2. Write a description about your CI/CD pipeline design and implementation including e.g.:
 
     - How is the current implementation working?
-      - If relevant, give the link to e.g. test server where latest version of app get deployed, or Artifacts (assets-for-download) from which one can download fresh apk, etc.
-    - Key features
+      - If relevant, include a link to e.g. test server where latest version of app is deployed, or to automatically generated artifacts (like apk for Android) where those can be downloaded
+    - Key features of the implementation
     - What is still missing?
     - Possible next steps or enhancements in future
 
 3. Submitting the assignment
 
-    - Include a link to your implementation and the written description to your project's Planner/project board
+    - Include a link to your implementation and the written description to your project's Planner/Trello/project board
     - Use your CI/CD pipeline implementation as a part of your project development workflow
 
 Assignment is evaluated as a part of the project work.
