@@ -6,26 +6,99 @@ Tests & code based on <https://github.com/ilkkamtk/integration-testing-ready>
 
 Testing successful API responses and error handling. The test cases for both scenarios are provided in the test folder.
 
-## Prerequisites
+## 1. Prerequisites
 
-1. Clone this repository
-1. Install dependencies with `npm install`
+1. Create a new repository using this as a template (click _Use this template_ button on top of the page)
+1. Clone the repo and install dependencies with `npm install`
 1. Create a database and a user for the application (example script: [db/create-db.sql](./db/create-db.sql))
-    - NOTE: default username and password should be changed and not shared publicly in the repo
+    - NOTE: default username and password should be changed and not shared publicly in the repo, use environment variables instead
 1. Create `.env` file in the root of the project (see `.env.example` for reference)
 1. Run tests with `npm test` locally and make sure they pass
 
-## Setting up CI/CD
+## 2. Setting up first CI/CD pipeline using GitHub Actions
 
-1. Create a new repository in GitHub. Use this repo as a template or clone and push this repository to the new repository (change the remote `origin` URL first with `git remote set-url origin <new-repo-url>`)
 1. Open the repository in GitHub in a browser and choose `Actions` from the top menu
    - Browse the available CI/CD templates and choose `Node.js` as the template
    - Commit the suggested changes to the repository
    - Pull the changes to your local repository
 1. View & edit the `.github/workflows/node.js.yml` [yaml](https://yaml.org/) file and update the content according your needs
-1. Test action by committing the changes and pushing them to the remote repository, check the status of the action in GitHub
+   - Set correct Node.js versions
+   - Think about the phases you want to include in your pipeline, e.g. build, test, deploy..?
+   - Refer to `package.json` for available scripts, e.g. `test:unit`, What will work on GitHub Actions platform and what is neeeded?
+1. Test actions by committing the changes and pushing them to the remote repository, check the status of the actions in GitHub
+1. Add other phases to the pipeline, e.g. use of Github secrets, tests including db,  deployment to a server (see example below)
+   - Add description of your implementations (or trials and errors) to the beginning of `README.md` in your repository
 
-## Example of setting up a CD pipeline for a Server (e.g. Virtual Machine in Azure)
+### Tips
+
+- You can set up multiple actions for different purposes, e.g. one for CI and another for CD or you can use multiple jobs in a single action, e.g. one for testing and another for deployment
+- You can test and modify ready-made actions from GitHub, just click _New workflow_ on the Actions page to browse them
+- You can set Node's `process.env` variables in the action using `env:` directive, e.g.
+
+    ```yaml
+    ...
+        - run: npm run test:unit
+          env:
+            NODE_ENV: development
+    ...
+    ```
+
+- You can create a temporary `.env` file in the action using `run:` directive, e.g.
+
+    ```yaml
+    ...
+    - name: Create .env file
+      run: |
+        echo "DB_HOST=localhost" >> .env
+        echo "DB_PORT=3306" >> .env
+        echo "DB_NAME=testdb" >> .env
+        echo "DB_USER=testuser" >> .env
+        echo "DB_PASSWORD=testpassword" >> .env
+    ...
+    ```
+
+- Replacing hardcoded values with [GitHub secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets), e.g.
+
+    ```yaml
+    echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+    echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+    ```
+
+- Ubuntu image used by GitHub Actions has MySQL pre-installed, you can add steps to start the MySQL service and create a database and user for testing, e.g.
+
+    ```yaml
+    ...
+    - name: Start MySQL service
+      run: sudo service mysql start
+
+    - name: Create test database and user
+      run: |
+        mysql -e "CREATE DATABASE testdb;"
+        mysql -e "CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'testpassword';"
+        mysql -e "GRANT ALL PRIVILEGES ON testdb.* TO 'testuser'@'localhost';"
+        mysql -e "FLUSH PRIVILEGES;"
+    ...
+    ```
+
+- Adding `env:` directive to set environment variables for the whole job, e.g.
+
+    ```yaml
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        env:
+          NODE_ENV: development
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_NAME: testdb
+          DB_USER: testuser
+          DB_PASSWORD: testpassword
+    ...
+    ```
+
+- These can be referenced in the action steps as `${{ env.DB_USER }}` etc.
+
+## 3. Example of setting up a CD pipeline for a Server (e.g. Virtual Machine in Azure)
 
 1. First, deploy the application on the server manually
     - make sure you have a server running and you can pull the repository from GitHub (without a need type password) and run the application

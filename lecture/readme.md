@@ -84,7 +84,7 @@ graph TD
 
 ---
 
-## Assignment
+## Assignments
 
 ### Reading & examples
 
@@ -98,14 +98,15 @@ Some links to get started with
 - [Android example](https://www.runway.team/blog/how-to-set-up-a-ci-cd-pipeline-android-app-using-bitrise) and [other example](https://www.runway.team/blog/ci-cd-pipeline-android-app-fastlane-github-actions)
 - [iOS example](https://www.runway.team/blog/how-to-set-up-a-ci-cd-pipeline-for-your-ios-app-fastlane-github-actions)
 
-### Task
+### Task 1 (individual): Continuous Integration with Node.js & GitHub Actions example
 
-Study/do [this Node.js & GitHub actions example](https://github.com/mattpe/node-ci-intro).
+Study and do [this Node.js & GitHub actions example](https://github.com/mattpe/node-ci-intro).
 
-#### Design and configure Continuous Integration pipeline for your project
+### Task 2 (team work): Design and configure Continuous Integration pipeline for your project
 
 1. Implement a functional CI/CD pipeline (on prototype level at least)
 
+    - Use your own project for the implementation, requirements depend on your project type
     - Try to reach at least making automatic build when you push code to your git remote repository. If you use NodeJS for back-end application, try to run (unit) tests and deploy the application automatically.
     - At your convenience, use GitHub (with integrated Actions) or Gitlab (with integrated CI pipelines) or TravisCI (or [any other](https://github.com/marketplace/category/continuous-integration))
     - Once you get the pipeline done, test pushing with working code (and corrupted code too to get a build to fail to see the results).
