@@ -43,7 +43,7 @@ Testing successful API responses and error handling. The test cases for both sce
     ...
     ```
 
-- You can create a temporary `.env` file in the action using `run:` directive, e.g.
+- You can create a temporary `.env` file for the action using `run:` directive and `echo` commands, e.g.
 
     ```yaml
     ...
@@ -53,7 +53,17 @@ Testing successful API responses and error handling. The test cases for both sce
         echo "DB_PORT=3306" >> .env
         echo "DB_NAME=testdb" >> .env
         echo "DB_USER=testuser" >> .env
-        echo "DB_PASSWORD=testpassword" >> .env
+        echo "DB_PASS=testpassword" >> .env
+        echo "PORT=3000" >> .env
+    ...
+    ```
+
+- Or if you want to copy the `.env.sample` file to `.env` and use it as it is, you can use:
+
+    ```yaml
+    ...
+    - name: Copy .env.sample to .env
+      run: cp .env.sample .env
     ...
     ```
 
@@ -61,16 +71,19 @@ Testing successful API responses and error handling. The test cases for both sce
 
     ```yaml
     echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-    echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+    echo "DB_PASS=${{ secrets.DB_PASSWORD }}" >> .env
     ```
 
-- Ubuntu image used by GitHub Actions has MySQL pre-installed, you can add steps to start the MySQL service and create a database and user for testing, e.g.
+- Ubuntu runner used by GitHub Actions has MySQL pre-installed, you can add steps to start the MySQL service and create a database and user for testing, e.g.
 
     ```yaml
     ...
     - name: Start MySQL service
-      run: sudo service mysql start
+      run: sudo systemctl start mysql
+    - name: Run database creation script from the repo
+      run: mysql -u root -proot < db/create-db.sql
 
+    # Or create database and user using mysql commands (this doesnt include creating tables):
     - name: Create test database and user
       run: |
         mysql -e "CREATE DATABASE testdb;"
@@ -92,7 +105,8 @@ Testing successful API responses and error handling. The test cases for both sce
           DB_PORT: 3306
           DB_NAME: testdb
           DB_USER: testuser
-          DB_PASSWORD: testpassword
+          DB_PASS: testpassword
+          PORT: 3000
     ...
     ```
 
