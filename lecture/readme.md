@@ -66,11 +66,11 @@
 
 ```mermaid
 graph TD
-    A[Local Code Commit] --> B[Build]
+    A[Local code development & commit] --> B[Build]
     B --> C{Unit/integration Tests}
     C -->|Pass| D[Push to CI server,\n Integration tests]
     C -->|Fail| E[Fix Issues]
-    E --> B
+    E --> A
     D -->|Pass| F[Deploy to Staging/\n Test server environment]
     D -->|Fail| E
     F --> G{Acceptance Tests}
@@ -102,7 +102,7 @@ Some links to get started with
 
 Study and do [this Node.js & GitHub actions example](https://github.com/mattpe/node-ci-intro).
 
-### Task 2 (team work): Design and configure Continuous Integration pipeline for your project
+### Task 2 (team work/project course): Design and configure Continuous Integration pipeline for your project
 
 1. Implement a functional CI/CD pipeline (on prototype level at least)
 
