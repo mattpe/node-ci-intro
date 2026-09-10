@@ -76,7 +76,6 @@ graph TD
     F --> G{Acceptance Tests}
     G -->|Pass| H[Deploy to Production]
     G -->|Fail| E
-    E --> F
     H --> J[Monitor & Collect Feedback]
     J --> K[Continuous Improvement]
     K --> A
